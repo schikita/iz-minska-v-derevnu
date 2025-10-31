@@ -1,158 +1,157 @@
-        // === Scroll progress bar ===
-        const progressEl = document.getElementById('progress');
-        const onScroll = () => {
-            const h = document.documentElement;
-            const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
-            progressEl.style.transform = `scaleX(${scrolled})`;
-        };
-        document.addEventListener('scroll', onScroll, { passive: true });
+document.addEventListener("DOMContentLoaded", () => {
+  const video = document.querySelector(".ambient-video");
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      video.load();
+      observer.disconnect();
+    }
+  });
+  observer.observe(video);
+});
 
-        // === THREE.js background + fireflies ===
-        const ENABLE_HERO_PARTICLES = false;
-        const canvas = document.querySelector('#hero-canvas');
-       
-      
-   
-        // Создаём градиент фон
-        const canvas2d = document.createElement('canvas');
-        canvas2d.width = 512;
-        canvas2d.height = 512;
-        const ctx = canvas2d.getContext('2d');
-        
-        // Красивый градиент неба с сельскими мотивами
-        const gradient = ctx.createLinearGradient(0, 0, 512, 512);
-        gradient.addColorStop(0, '#1a3a52');      // тёмный верх
-        gradient.addColorStop(0.3, '#2d5f7d');    // средина
-        gradient.addColorStop(0.7, '#4a7c99');    // светлее
-        gradient.addColorStop(1, '#6b9db5');      // внизу светло
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, 512, 512);
+// === Scroll progress bar ===
+const progressEl = document.getElementById("progress");
+const onScroll = () => {
+  const h = document.documentElement;
+  const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight);
+  progressEl.style.transform = `scaleX(${scrolled})`;
+};
+document.addEventListener("scroll", onScroll, { passive: true });
 
-        // Добавим текстуру зёрен
-        //for (let i = 0; i < 100; i++) {
-            //ctx.fillStyle = `rgba(255, 255, 255, ${Math.random() * 0.1})`;
-            //ctx.fillRect(Math.random() * 512, Math.random() * 512, Math.random() * 2, Math.random() * 2);
-       // }
+// === THREE.js background + fireflies ===
+const ENABLE_HERO_PARTICLES = false;
+const canvas = document.querySelector("#hero-canvas");
 
-   
-        // scene.background = bgTexture;
+// Создаём градиент фон
+const canvas2d = document.createElement("canvas");
+canvas2d.width = 512;
+canvas2d.height = 512;
+const ctx = canvas2d.getContext("2d");
 
-        // Частицы (светлячки)
-     
-        const particlesCnt = 800;
-        const posArray = new Float32Array(particlesCnt * 3);
-        const velocities = new Float32Array(particlesCnt * 3);
-        const sizes = new Float32Array(particlesCnt);
+// Красивый градиент неба с сельскими мотивами
+const gradient = ctx.createLinearGradient(0, 0, 512, 512);
+gradient.addColorStop(0, "#1a3a52"); // тёмный верх
+gradient.addColorStop(0.3, "#2d5f7d"); // средина
+gradient.addColorStop(0.7, "#4a7c99"); // светлее
+gradient.addColorStop(1, "#6b9db5"); // внизу светло
+ctx.fillStyle = gradient;
+ctx.fillRect(0, 0, 512, 512);
 
-        for (let i = 0; i < particlesCnt; i++) {
-            posArray[i * 3] = (Math.random() - .5) * 200;
-            posArray[i * 3 + 1] = (Math.random() - .5) * 200;
-            posArray[i * 3 + 2] = (Math.random() - .5) * 100;
-            
-            velocities[i * 3] = (Math.random() - .5) * .15;
-            velocities[i * 3 + 1] = (Math.random() - .5) * .15;
-            velocities[i * 3 + 2] = (Math.random() - .5) * .05;
-            
-            sizes[i] = Math.random() * 0.5 + 0.1;
-        }
+// Добавим текстуру зёрен
+//for (let i = 0; i < 100; i++) {
+//ctx.fillStyle = `rgba(255, 255, 255, ${Math.random() * 0.1})`;
+//ctx.fillRect(Math.random() * 512, Math.random() * 512, Math.random() * 2, Math.random() * 2);
+// }
 
-       
-     
-        
+// scene.background = bgTexture;
 
+// Частицы (светлячки)
 
-       
+const particlesCnt = 800;
+const posArray = new Float32Array(particlesCnt * 3);
+const velocities = new Float32Array(particlesCnt * 3);
+const sizes = new Float32Array(particlesCnt);
 
-       
+for (let i = 0; i < particlesCnt; i++) {
+  posArray[i * 3] = (Math.random() - 0.5) * 200;
+  posArray[i * 3 + 1] = (Math.random() - 0.5) * 200;
+  posArray[i * 3 + 2] = (Math.random() - 0.5) * 100;
 
-      
-    
-      
-        // === IntersectionObserver: reveal ===
-        const io = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show');
-                    io.unobserve(entry.target);
-                }
-            });
-        }, { threshold: .16 });
+  velocities[i * 3] = (Math.random() - 0.5) * 0.15;
+  velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.15;
+  velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.05;
 
-        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  sizes[i] = Math.random() * 0.5 + 0.1;
+}
 
-        // === Topbar scroll ===
-        const topbar = document.getElementById('topbar');
+// === IntersectionObserver: reveal ===
+const io = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+        io.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.16 }
+);
 
-        function toggleTopbar() {
-            if (window.scrollY > 80) topbar.classList.add('topbar--compact');
-            else topbar.classList.remove('topbar--compact');
-        }
+document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
-        document.addEventListener('scroll', toggleTopbar, { passive: true });
-        toggleTopbar();
+// === Topbar scroll ===
+const topbar = document.getElementById("topbar");
 
- // === Кнопка «Наверх» ===
-        const horseUp = document.getElementById('horseUp');
+function toggleTopbar() {
+  if (window.scrollY > 80) topbar.classList.add("topbar--compact");
+  else topbar.classList.remove("topbar--compact");
+}
 
-        function toggleHorseUp() {
-            if (window.scrollY > 300) horseUp.classList.add('visible');
-            else horseUp.classList.remove('visible');
-        }
+document.addEventListener("scroll", toggleTopbar, { passive: true });
+toggleTopbar();
 
-        window.addEventListener('scroll', toggleHorseUp, { passive: true });
-        toggleHorseUp();
+// === Кнопка «Наверх» ===
+const horseUp = document.getElementById("horseUp");
 
-        horseUp.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+function toggleHorseUp() {
+  if (window.scrollY > 300) horseUp.classList.add("visible");
+  else horseUp.classList.remove("visible");
+}
 
-        horseUp.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        });
+window.addEventListener("scroll", toggleHorseUp, { passive: true });
+toggleHorseUp();
 
+horseUp.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
 
-        // === Мобильное меню ===
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('navMenu');
-        const navLinks = navMenu.querySelectorAll('.nav-link');
+horseUp.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+});
 
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
+// === Мобильное меню ===
+const hamburger = document.getElementById("hamburger");
+const navMenu = document.getElementById("navMenu");
+const navLinks = navMenu.querySelectorAll(".nav-link");
 
-        // Закрыть меню при клике на ссылку
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            });
-        });
+hamburger.addEventListener("click", () => {
+  hamburger.classList.toggle("active");
+  navMenu.classList.toggle("active");
+});
 
-        // Закрыть меню при скролле
-        document.addEventListener('scroll', () => {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-        }, { passive: true });
+// Закрыть меню при клике на ссылку
+navLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    hamburger.classList.remove("active");
+    navMenu.classList.remove("active");
+  });
+});
 
-
-
+// Закрыть меню при скролле
+document.addEventListener(
+  "scroll",
+  () => {
+    hamburger.classList.remove("active");
+    navMenu.classList.remove("active");
+  },
+  { passive: true }
+);
 
 // === HERO slideshow (crossfade + Ken Burns) ===
-const heroLayers = Array.from(document.querySelectorAll('.hero-bg .layer'));
+const heroLayers = Array.from(document.querySelectorAll(".hero-bg .layer"));
 let heroIdx = 0;
 
 // ждём загрузки картинок, чтобы не мигало
-heroLayers.forEach(img => {
+heroLayers.forEach((img) => {
   if (img.complete) img.dataset.loaded = "1";
-  else img.addEventListener('load', () => img.dataset.loaded = "1");
+  else img.addEventListener("load", () => (img.dataset.loaded = "1"));
 });
 
 // показать кадр
-function showHero(i){
-  heroLayers.forEach((el, idx) => el.classList.toggle('active', idx === i));
+function showHero(i) {
+  heroLayers.forEach((el, idx) => el.classList.toggle("active", idx === i));
   heroIdx = i;
 }
 
@@ -168,30 +167,30 @@ const startHero = () => {
 };
 
 // если хотя бы один уже загружен — стартуем сразу, иначе ждём
-if (heroLayers.some(el => el.dataset.loaded === "1")) startHero();
+if (heroLayers.some((el) => el.dataset.loaded === "1")) startHero();
 else {
   const onAnyLoad = () => {
-    if (heroLayers.some(el => el.dataset.loaded === "1")) {
-      heroLayers.forEach(el => el.removeEventListener('load', onAnyLoad));
+    if (heroLayers.some((el) => el.dataset.loaded === "1")) {
+      heroLayers.forEach((el) => el.removeEventListener("load", onAnyLoad));
       startHero();
     }
   };
-  heroLayers.forEach(el => el.addEventListener('load', onAnyLoad));
+  heroLayers.forEach((el) => el.addEventListener("load", onAnyLoad));
 }
 
 // === Parallax только для активного слоя ===
-document.addEventListener('mousemove', (e) => {
+document.addEventListener("mousemove", (e) => {
   const active = heroLayers[heroIdx];
   if (!active) return;
   const x = (e.clientX / window.innerWidth - 0.5) * 2;
   const y = (e.clientY / window.innerHeight - 0.5) * 2;
-  const speed = parseFloat(active.dataset.speed || '0.3');
-  active.style.transform =
-    `translate(${x * 18 * speed}px, ${y * 12 * speed}px) scale(1.12)`;
+  const speed = parseFloat(active.dataset.speed || "0.3");
+  active.style.transform = `translate(${x * 18 * speed}px, ${
+    y * 12 * speed
+  }px) scale(1.12)`;
 });
 
-
-document.querySelectorAll(".story-media__video").forEach(block => {
+document.querySelectorAll(".story-media__video").forEach((block) => {
   const video = block.querySelector("video");
   const button = block.querySelector(".play-toggle");
 
@@ -213,14 +212,13 @@ document.querySelectorAll(".story-media__video").forEach(block => {
   video.addEventListener("ended", () => button.classList.remove("hide"));
 });
 
-
-const slides = document.querySelectorAll('.photo-slide');
+const slides = document.querySelectorAll(".photo-slide");
 let current = 0;
 let timer;
 
 const showSlide = (index) => {
   slides.forEach((s, i) => {
-    s.classList.toggle('active', i === index);
+    s.classList.toggle("active", i === index);
   });
 };
 
@@ -234,150 +232,165 @@ const prevSlide = () => {
   showSlide(current);
 };
 
-document.querySelector('.slider-btn.next').addEventListener('click', () => {
+document.querySelector(".slider-btn.next").addEventListener("click", () => {
   nextSlide();
   resetTimer();
 });
 
-document.querySelector('.slider-btn.prev').addEventListener('click', () => {
+document.querySelector(".slider-btn.prev").addEventListener("click", () => {
   prevSlide();
   resetTimer();
 });
 
-const startAuto = () => timer = setInterval(nextSlide, 8000);
-const resetTimer = () => { clearInterval(timer); startAuto(); };
+const startAuto = () => (timer = setInterval(nextSlide, 8000));
+const resetTimer = () => {
+  clearInterval(timer);
+  startAuto();
+};
 
 startAuto();
 
-
-document.querySelectorAll(".photo-slide").forEach(slide => {
+document.querySelectorAll(".photo-slide").forEach((slide) => {
   const bg = slide.dataset.bg;
   if (bg) slide.style.backgroundImage = `url('${bg}')`;
 });
 
+const mosaicItems = document.querySelectorAll(".mosaic-item");
+const modal = document.getElementById("mosaicModal");
+const modalImg = document.getElementById("mosaicModalImg");
+const caption = document.getElementById("mosaicCaption");
+const closeBtn = document.querySelector(".mosaic-close");
 
-const mosaicItems = document.querySelectorAll('.mosaic-item');
-const modal = document.getElementById('mosaicModal');
-const modalImg = document.getElementById('mosaicModalImg');
-const caption = document.getElementById('mosaicCaption');
-const closeBtn = document.querySelector('.mosaic-close');
-
-mosaicItems.forEach(item => {
-  item.addEventListener('click', () => {
+mosaicItems.forEach((item) => {
+  item.addEventListener("click", () => {
     const fullImg = item.dataset.full;
-    const alt = item.querySelector('img').alt;
+    const alt = item.querySelector("img").alt;
 
-    modal.classList.add('open');
+    modal.classList.add("open");
     modalImg.src = fullImg;
     caption.textContent = alt;
     //document.body.style.overflow = 'hidden'; // блокируем скролл
   });
 });
 
-closeBtn.addEventListener('click', closeModal);
-modal.addEventListener('click', e => {
+closeBtn.addEventListener("click", closeModal);
+modal.addEventListener("click", (e) => {
   if (e.target === modal) closeModal();
 });
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
 });
 
 function closeModal() {
-  modal.classList.remove('open');
+  modal.classList.remove("open");
   //document.body.style.overflow = '';
 }
-
 
 // ========================================
 // PROJECTS CAROUSEL
 // ========================================
 (function () {
-    const viewport = document.querySelector('#projects .projects-viewport');
-    if (!viewport) return;
+  const viewport = document.querySelector("#projects .projects-viewport");
+  if (!viewport) return;
 
-    const stage = viewport.querySelector('.projects-stage');
-    const cards = [...stage.querySelectorAll('.project-card')];
-    if (!cards.length) return;
+  const stage = viewport.querySelector(".projects-stage");
+  const cards = [...stage.querySelectorAll(".project-card")];
+  if (!cards.length) return;
 
-    const dotsWrap = viewport.querySelector('.pr-dots');
-    const prevBtn = viewport.querySelector('.prev');
-    const nextBtn = viewport.querySelector('.next');
+  const dotsWrap = viewport.querySelector(".pr-dots");
+  const prevBtn = viewport.querySelector(".prev");
+  const nextBtn = viewport.querySelector(".next");
 
-    let i = 0, timer = null;
-    const interval = +(viewport.dataset.interval || 5000);
-    const autoplay = viewport.dataset.autoplay !== 'false';
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let i = 0,
+    timer = null;
+  const interval = +(viewport.dataset.interval || 5000);
+  const autoplay = viewport.dataset.autoplay !== "false";
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    dotsWrap.innerHTML = cards.map(() => '<i></i>').join('');
-    const dots = [...dotsWrap.children];
+  dotsWrap.innerHTML = cards.map(() => "<i></i>").join("");
+  const dots = [...dotsWrap.children];
 
-    const show = (idx) => {
-        i = (idx + cards.length) % cards.length;
-        cards.forEach((c, k) => c.classList.toggle('is-active', k === i));
-        dots.forEach((d, k) => d.classList.toggle('is-on', k === i));
-    };
+  const show = (idx) => {
+    i = (idx + cards.length) % cards.length;
+    cards.forEach((c, k) => c.classList.toggle("is-active", k === i));
+    dots.forEach((d, k) => d.classList.toggle("is-on", k === i));
+  };
 
-    const next = () => show(i + 1);
-    const prev = () => show(i - 1);
-    const play = () => {
-        if (reduce || !autoplay) return;
-        stop();
-        timer = setInterval(next, interval);
-    };
-    const stop = () => timer && clearInterval(timer);
+  const next = () => show(i + 1);
+  const prev = () => show(i - 1);
+  const play = () => {
+    if (reduce || !autoplay) return;
+    stop();
+    timer = setInterval(next, interval);
+  };
+  const stop = () => timer && clearInterval(timer);
 
-    show(0);
+  show(0);
+  play();
+
+  nextBtn?.addEventListener("click", () => {
+    next();
     play();
+  });
+  prevBtn?.addEventListener("click", () => {
+    prev();
+    play();
+  });
+  dotsWrap.addEventListener("click", (e) => {
+    const idx = dots.indexOf(e.target);
+    if (idx > -1) {
+      show(idx);
+      play();
+    }
+  });
 
-    nextBtn?.addEventListener('click', () => { next(); play(); });
-    prevBtn?.addEventListener('click', () => { prev(); play(); });
-    dotsWrap.addEventListener('click', (e) => {
-        const idx = dots.indexOf(e.target);
-        if (idx > -1) { show(idx); play(); }
-    });
+  viewport.addEventListener("mouseenter", stop);
+  viewport.addEventListener("mouseleave", play);
+  viewport.addEventListener("focusin", stop);
+  viewport.addEventListener("focusout", play);
 
-    viewport.addEventListener('mouseenter', stop);
-    viewport.addEventListener('mouseleave', play);
-    viewport.addEventListener('focusin', stop);
-    viewport.addEventListener('focusout', play);
+  // Swipe support
+  let sx = 0,
+    sy = 0;
 
-    // Swipe support
-    let sx = 0, sy = 0;
+  stage.addEventListener("pointerdown", (e) => {
+    sx = e.clientX;
+    sy = e.clientY;
+    stage.setPointerCapture(e.pointerId);
+    stop();
+  });
 
-    stage.addEventListener('pointerdown', (e) => {
-        sx = e.clientX;
-        sy = e.clientY;
-        stage.setPointerCapture(e.pointerId);
-        stop();
-    });
+  stage.addEventListener("pointerup", (e) => {
+    const dx = e.clientX - sx;
+    const dy = e.clientY - sy;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 30) {
+      dx > 0 ? prev() : next();
+    }
+    play();
+  });
 
-    stage.addEventListener('pointerup', (e) => {
-        const dx = e.clientX - sx;
-        const dy = e.clientY - sy;
-        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 30) {
-            dx > 0 ? prev() : next();
-        }
-        play();
-    });
+  // Touch events
+  let touchStartX = 0,
+    touchEndX = 0;
+  stage.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    stop();
+  });
 
-    // Touch events
-    let touchStartX = 0, touchEndX = 0;
-    stage.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-        stop();
-    });
+  stage.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    const dx = touchEndX - touchStartX;
+    if (Math.abs(dx) > 40) dx > 0 ? prev() : next();
+    play();
+  });
 
-    stage.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        const dx = touchEndX - touchStartX;
-        if (Math.abs(dx) > 40) dx > 0 ? prev() : next();
-        play();
-    });
+  // Auto-pause when out of view
+  const io = new IntersectionObserver(
+    ([entry]) => {
+      entry.isIntersecting ? play() : stop();
+    },
+    { threshold: 0.2 }
+  );
 
-    // Auto-pause when out of view
-    const io = new IntersectionObserver(([entry]) => {
-        entry.isIntersecting ? play() : stop();
-    }, { threshold: 0.2 });
-
-    io.observe(viewport);
+  io.observe(viewport);
 })();

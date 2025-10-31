@@ -413,13 +413,13 @@ header.hero::after{
 .wide-feature__bg {
   position: absolute;
   inset: 0;
-  background-image: var(--bg);
   background-size: cover;
   background-position: center;
   transform: scale(1.05);
   filter: brightness(0.85) saturate(1.1);
   z-index: 0;
 }
+
 
 /* Лёгкое затемнение поверх */
 .wide-feature::before {

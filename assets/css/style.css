@@ -290,6 +290,26 @@ header.hero::after{
 }
 
 
+.wide-feature__content a {
+  color: #ffd166; /* тёплый акцентный цвет */
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 209, 102, 0.6);
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.wide-feature__content a:hover {
+  color: #ffed9a;
+  border-bottom-color: rgba(255, 237, 154, 0.9);
+}
+
+.wide-feature__content a:focus-visible {
+  outline: 2px solid #ffd166;
+  outline-offset: 2px;
+  border-bottom-color: transparent;
+}
+
+
 /* Подсказка «Смотреть репортаж» — стеклянная плашка с анимацией стрелок */
 .read-cue {
   position: absolute;

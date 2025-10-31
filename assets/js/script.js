@@ -320,23 +320,23 @@ mosaicItems.forEach(item => {
     modal.classList.add('open');
     modalImg.src = fullImg;
     caption.textContent = alt;
-
-    // Блокируем прокрутку страницы
-    document.body.style.overflow = 'hidden';
+    //document.body.style.overflow = 'hidden'; // блокируем скролл
   });
 });
 
 closeBtn.addEventListener('click', closeModal);
 modal.addEventListener('click', e => {
-  if (e.target === modal || e.target.classList.contains('mosaic-backdrop')) {
-    closeModal();
-  }
+  if (e.target === modal) closeModal();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
 });
 
 function closeModal() {
   modal.classList.remove('open');
-  document.body.style.overflow = ''; // возвращаем прокрутку
+  //document.body.style.overflow = '';
 }
+
 
 // ========================================
 // PROJECTS CAROUSEL

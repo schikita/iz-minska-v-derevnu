@@ -752,57 +752,77 @@ header.hero::after{
 }
 
 /* === МОДАЛЬНОЕ ОКНО === */
+/* === МОДАЛЬНОЕ ОКНО === */
 .mosaic-modal {
   display: none;
-  position: fixed;
+  position: fixed;          /* ← фиксируем на весь экран */
   inset: 0;
-  z-index: 1000;
-  align-items: center;
+  z-index: 9999;            /* ← выше всех секций и элементов */
+  align-items: center;      /* по центру */
   justify-content: center;
+  background: rgba(0, 0, 0, 0.85); /* затемнение теперь у контейнера */
+  backdrop-filter: blur(8px);
+  cursor: pointer;
 }
 
 .mosaic-modal.open {
   display: flex;
+  animation: fadeIn 0.3s ease;
 }
 
+/* сам фон внутри можно удалить, теперь он не нужен */
 .mosaic-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(8px);
-  z-index: -1;
+  display: none;
 }
 
+/* изображение */
 .mosaic-modal-img {
+  position: relative;
+  z-index: 2;
   max-width: 90%;
   max-height: 85vh;
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
   animation: zoomIn 0.4s ease;
+  cursor: default;
 }
 
-@keyframes zoomIn {
-  from { transform: scale(0.9); opacity: 0.3; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-.mosaic-close {
+/* подпись */
+.mosaic-caption {
   position: absolute;
+  bottom: 32px;
+  left: 0;
+  right: 0;
+  color: #fff;
+  font-size: 1.1rem;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+/* кнопка закрытия */
+.mosaic-close {
+  position: fixed;         /* ← фиксируем к экрану, а не контейнеру */
   top: 24px;
   right: 36px;
   color: white;
   font-size: 2rem;
   cursor: pointer;
-  z-index: 10;
+  z-index: 10000;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.mosaic-close:hover {
+  transform: scale(1.2);
+  color: #ffd166;
 }
 
-.mosaic-caption {
-  position: absolute;
-  bottom: 32px;
-  color: #fff;
-  font-size: 1.1rem;
-  text-align: center;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+/* анимации */
+@keyframes zoomIn {
+  from { transform: scale(0.9); opacity: 0.3; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 

@@ -293,29 +293,14 @@
   }
 
   /* Модальное окно — вертикальный формат */
+    .mosaic-modal {
+    align-items: flex-start;
+    padding-top: 10vh;
+  }
+
   .mosaic-modal-img {
-    max-width: 95%;
-    max-height: 80vh;
-    object-fit: contain;
-  }
-
-  /* Убираем скролл у фона при открытии модалки */
-  body.modal-open {
-    overflow: hidden;
-    height: 100vh;
-  }
-
-  /* Кнопка закрытия — крупнее и ближе */
-  .mosaic-close {
-    top: 12px;
-    right: 16px;
-    font-size: 1.8rem;
-  }
-
-  .mosaic-caption {
-    bottom: 20px;
-    font-size: 0.95rem;
-    padding: 0 10px;
+    max-width: 94%;
+    max-height: 60vh;
   }
 
   .story-media__text p {

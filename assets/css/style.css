@@ -425,23 +425,15 @@ header.hero::after{
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0.85) saturate(1.1);
   overflow: hidden;
   color: #fff;
 }
 
-/* Фон */
-.wide-feature__bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  transform: scale(1.05);
-  filter: brightness(0.85) saturate(1.1);
-  z-index: 0;
-}
-
-
-/* Лёгкое затемнение поверх */
+/* затемнение */
 .wide-feature::before {
   content: "";
   position: absolute;
@@ -453,21 +445,14 @@ header.hero::after{
     rgba(0, 0, 0, 0.7) 100%
   );
   z-index: 1;
-  pointer-events: none;
 }
 
-/* Всплывающий блок с текстом */
 .wide-feature__content {
   position: relative;
   z-index: 2;
   max-width: 900px;
   margin: 0 auto clamp(40px, 8vh, 80px);
   padding: clamp(20px, 4vw, 36px);
-  
-  
-  border-radius: 20px;
-  
-  text-align: left;
 }
 
 /* Заголовок и текст */

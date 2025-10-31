@@ -1,0 +1,368 @@
+@media (max-width: 1024px) {
+  .ambient {
+    display: none;
+  }
+  .hamburger {
+    display: none;
+  }
+}
+
+/* Уважение к reduce-motion */
+@media (prefers-reduced-motion: reduce) {
+  .read-cue {
+    transition: none;
+  }
+  .chevrons::before,
+  .chevrons::after {
+    animation: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .story {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .story.align-right .media {
+    grid-column: 2;
+  }
+
+  .story.align-right .text {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 900px) {
+  .hamburger {
+    all: unset;
+    cursor: pointer;
+    display: grid;
+    gap: 4px;
+  }
+
+  .nav-menu {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .nav-menu {
+    display: flex;
+    gap: 2rem;
+    position: static;
+    background: transparent;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* снимаем десктопные абсолюты и сжимаем панель */
+  .hero-content {
+    position: relative; /* было absolute */
+    inset: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    transform: none;
+
+    width: auto;
+    max-width: 50vw; /* шире блока — меньше переносов */
+    margin: 0 auto; /* центр по горизонтали */
+    padding: 14px 16px; /* компактные отступы */
+    border-radius: 14px;
+
+    text-align: left;
+    background: rgba(0, 0, 0, 0.13); /* локальное затемнение под текстом */
+    backdrop-filter: blur(0px);
+  }
+
+  /* заголовок — меньше, плотнее, без жёстких переносов */
+  .title {
+    font-size: clamp(1.6rem, 8vw, 2.4rem);
+    line-height: 1.05;
+    letter-spacing: 0.2px;
+    text-wrap: balance; /* современная расстановка строк (если поддерживается) */
+    word-break: normal;
+    overflow-wrap: anywhere; /* чтобы длинные слова не ломали макет */
+  }
+
+  /* подзаголовок — читабельнее */
+  .subtitle {
+    font-size: clamp(0.95rem, 3.8vw, 1.1rem);
+    line-height: 1.45;
+    opacity: 0.95;
+    margin-top: 0.6rem;
+    text-wrap: pretty; /* мягкие переносы (если поддерживается) */
+  }
+
+  /* подсказка «к чтению» — не налезала на текст */
+  .read-cue {
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    transform: translateX(-50%);
+    padding: 8px 12px;
+  }
+}
+
+/* Мобильное меню */
+@media (max-width: 767px) {
+  .nav-menu {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    flex-direction: column;
+    padding: 1.5rem 2rem;
+    gap: 1rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    z-index: 9;
+  }
+
+  .nav-menu.active {
+    max-height: 500px;
+    display: flex;
+  }
+
+  .nav-link {
+    color: var(--ink);
+    padding: 0.75rem 0;
+    border-bottom: none;
+    font-size: 1rem;
+  }
+
+  .nav-link:hover {
+    color: var(--accent);
+    border-bottom: none;
+    padding-left: 0.5rem;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+  }
+}
+
+@media (max-width: 600px) {
+  .horse-up {
+    width: min(96px, 28vw);
+    right: 14px;
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Для мобильных версий */
+@media (max-width: 767px) {
+  header.hero {
+    display: block; /* Убираем grid */
+  }
+
+  .hero-content {
+    position: relative;
+    bottom: 10%; /* расположение на 10% от нижней части экрана */
+    transform: translateX(-50%);
+    width: 100%;    
+    padding: 0 16px;
+  }
+
+  .title {
+    font-size: clamp(2rem, 8vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: 0.3px;
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+    margin: 0;
+    padding-left: 10px;
+  }
+
+  .subtitle {
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    margin-top: 0.6rem;
+    opacity: 0.9;
+    padding-left: 10px;
+  }
+
+  /* Fade-in util */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px); /* Меньше сдвиг для мобильных */
+    transition: opacity 0.6s cubic-bezier(0.65, 0.05, 0.36, 1),
+      transform 0.6s cubic-bezier(0.65, 0.05, 0.36, 1); /* Ускоренная анимация для мобильных */
+  }
+
+  .reveal.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .read-cue {
+    font-size: 12px;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+
+   .photo-slider {
+    height: 70vh; /* немного меньше высоты на мобильных */
+  }
+
+  .photo-caption {
+    bottom: 1.5rem;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    width: 90%;
+    max-width: none;
+    padding: 0.9rem 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+  }
+
+  .photo-caption h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .photo-caption p {
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  .slider-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.5rem;
+    background: rgba(0, 0, 0, 0.35);
+  }
+
+  .slider-btn.prev {
+    left: 8px;
+  }
+
+  .slider-btn.next {
+    right: 8px;
+  }
+
+  .text__desc_1 p, .text__desc_2 p {
+  font-family: "Gothic 60", "Lora", serif;
+  font-weight: 400;
+  font-size: 14px;
+  margin-bottom: 1em;
+  text-indent: 1.5em;
+}
+
+
+ .mosaic-grid {
+    grid-template-columns: repeat(2, 1fr); /* Две колонки */
+    grid-auto-rows: 160px; /* меньше высота */
+  }
+
+  .mosaic-item {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+  }
+
+  .overlay {
+    background: rgba(0, 0, 0, 0.45);
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    opacity: 1; /* всегда видно немного */
+    transition: none;
+  }
+
+  .overlay span {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .mosaic-item:hover img {
+    transform: none; /* убираем zoom на тач-устройствах */
+  }
+
+  /* Модальное окно — вертикальный формат */
+  .mosaic-modal-img {
+    max-width: 95%;
+    max-height: 80vh;
+    object-fit: contain;
+  }
+
+  /* Убираем скролл у фона при открытии модалки */
+  body.modal-open {
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  /* Кнопка закрытия — крупнее и ближе */
+  .mosaic-close {
+    top: 12px;
+    right: 16px;
+    font-size: 1.8rem;
+  }
+
+  .mosaic-caption {
+    bottom: 20px;
+    font-size: 0.95rem;
+    padding: 0 10px;
+  }
+
+  .story-media__text p {
+    text-align: start;
+  }
+}
+
+/* Для десктопа */
+@media (min-width: 768px) {
+  .hero-content {
+    position: absolute;
+    right: clamp(14px, 3vw, 30px);
+    bottom: calc(clamp(32px, 4vw, 60px) + 100px);
+    max-width: 90%;
+    text-align: left;
+  }
+
+  .title {
+    font-size: clamp(2.4rem, 6.5vw, 5rem);
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.65);
+  }
+
+  .subtitle {
+    font-size: clamp(1rem, 2.4vw, 1.45rem);
+    margin-top: 0.6rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+  }
+
+.farm-text p {
+  font-family: "Gothic 60", "Lora", serif;
+  font-weight: 400;
+  font-size: 14px;
+  margin-bottom: 1em;
+  text-indent: 1.5em;
+}
+  
+}
+
+/* ====== Мобильная адаптация секции с видео ====== */
+@media (max-width: 900px) {
+  .story-media,
+  .story-media--reverse {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .story-media__video {
+    order: -1;
+    border-radius: 16px;
+  }
+}

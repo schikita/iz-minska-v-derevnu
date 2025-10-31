@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Из Минска в деревню!</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
+
+    <link rel="preload" href="./assets/fonts/Gothic60-Regular.otf" as="font" type="font/otf" crossorigin />
+</head>
+
+<body>
+    <nav class="topbar" id="topbar" aria-label="Основная навигация">
+        <div class="topbar__inner">
+            <a href="https://www.sb.by/" class="logo" target="_blank" rel="noopener noreferrer">
+                <img src="./assets/img/logo.png" alt="Лого SB.BY" loading="lazy" width="44" height="44" />
+                <span class="logo-text">SB.BY</span>
+            </a>
+            <div class="spacer"></div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#sec-oksana-oleg" class="nav-link">🏡 История Переезда</a></li>
+                <li><a href="#sec-animals" class="nav-link">🐐 Наши Подопечные</a></li>
+                <li><a href="#text__desc_2" class="nav-link">👨‍👩‍👧‍👦 Семья</a></li>
+                <li><a href="#sec-finale" class="nav-link">❤️ Наша Миссия</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Меню">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="progress" id="progress"></div>
+
+    <!-- Ambient side videos -->
+    <aside class="ambient ambient-left" aria-hidden="true">
+        <video autoplay muted playsinline loop>
+            <source src="./assets/videos/ambient/barn_inside_dust.mp4" type="video/mp4">
+        </video>
+    </aside>
+    <aside class="ambient ambient-right" aria-hidden="true">
+        <video autoplay muted playsinline loop>
+            <source src="./assets/videos/ambient/chickens_bokeh.mp4" type="video/mp4">
+        </video>
+    </aside>
+
+<header class="hero">
+  <canvas id="hero-canvas"></canvas>
+
+  <!-- Добавили фоновые слои -->
+  <div class="hero-bg">
+    <img src="./assets/img/hero/farm-view.jpg" alt="Семья во дворе" class="layer" data-speed="0.2">
+    <img src="./assets/img/hero/couple-hugging.jpg" alt="Семья на закате" class="layer" data-speed="0.4">
+    <img src="./assets/img/hero/sunlight.jpg" alt="Солнечный свет в окне" class="layer" data-speed="0.6">
+  </div>
+
+  <div class="hero-content reveal show">
+    <h1 class="title">Из Минска <br>в деревню!</h1>
+    <p class="subtitle">Молодая семья продала квартиру в столице, чтобы спасать животных с бойни. Посмотрим, как они живут? </p>
+  </div>
+
+  <a href="#sec-oksana-oleg" class="read-cue" aria-label="К чтению">
+    <span class="cue-text">СМОТРЕТЬ РЕПОРТАЖ</span>
+    <span class="chevrons" aria-hidden="true"></span>
+  </a>
+</header>
+
+
+
+
+    <main class="content">
+
+        <section class="container">
+            <section class="wide-feature reveal" id="sec-oksana-oleg">
+                <div class="wide-feature__bg" style="--bg:url('/assets/img/bg-2.jpg')"></div>
+
+
+                <div class="wide-feature__content">
+                    <h2>История переезда</h2>
+                    <p>
+                        Около 20 лет назад Оксана Плешко и Олег Макоско решили поменять столичную прописку на сельскую.
+                        И с тех пор ни разу не пожалели. Живут они в деревне Недреске Минского района, да только не
+                        одни…
+                        Подробности невероятной истории читайте в «Живом репортаже» Екатерины Кваченок.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 1. Видео справа -->
+            <section class="story-media reveal" id="sec-animals">
+                <div class="story-media__text">
+                    <h2>Наши подопечные</h2>
+                    <p>
+                        На семейном подворье фермерского хозяйства «Олекса-ферм» сегодня множество обитателей:
+                        лошади, козы, куры, свиньи, гуси, павлины, корова, бык, кошки, собаки. Предпосылки к сельской
+                        жизни у Оксаны были
+                        с детства — бабушка и дедушка держали большое хозяйство. Позже девушка и сама увлеклась
+                        лошадьми, занималась в
+                        Ратомке, а затем преподавала.
+                    </p>
+                </div>
+                <div class="story-media__video">
+                    <video src="./assets/videos/ambient/farm.mp4" preload="metadata"
+                        poster="./assets/img/story/oksana-oleg-farm.jpg"></video>
+                    <button class="play-toggle" aria-label="Воспроизвести видео"></button>
+                </div>
+            </section>
+
+            <!-- 2. Видео слева -->
+            <section class="story-media story-media--reverse reveal" id="sec-buyan">
+
+                <div class="story-media__text">
+                    <h2>История Буяна</h2>
+                    <p>
+                        Через какое-то время случилась первая история спасения. Буян сильно поранился, врачи говорили,
+                        что лечение
+                        бессмысленно и его отдадут на мясо. Я поняла, что не могу позволить этому случиться. Выкупила
+                        Буяна, арендовала
+                        у местного конюха сарай, поселила его туда. Тогда мы с Олегом решили: продавать жильё в Минске и
+                        покупать дом в
+                        деревне.
+                    </p>
+                </div>
+                <div class="story-media__video">
+                    <video src="./assets/videos/ambient/bujan.mp4" preload="metadata" muted
+                        poster="./assets/img/bujan.jpg">></video>
+                    <button class="play-toggle" aria-label="Воспроизвести видео"></button>
+                </div>
+            </section>
+
+
+            <section class="photo-slider reveal" id="sec-gallery">
+                <div class="photo-slider__track">
+                    <div class="photo-slide active" data-bg="./assets/img/gallery/farm-1.jpg">
+                        <div class="photo-caption">
+
+                            <p>Со временем спасенных лошадей становилось все больше, места не хватало. Когда Минский
+                                райисполком выделил семье 60 гектаров земли, супруги оформили свое КФХ «Олекса-ферм».
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="photo-slide" data-bg="./assets/img/gallery/farm-2.jpg">
+                        <div class="photo-caption">
+                            <p>По словам мужчины, выделенных 60 гектаров им вполне хватает, чтобы содержать около 80
+                                спасенных животных, выращивать овес, пшеницу, заготавливать сено, излишки которого
+                                фермеры реализуют.</p>
+                        </div>
+                    </div>
+
+                    <div class="photo-slide" data-bg="./assets/img/gallery/farm-3.jpg">
+                        <div class="photo-caption">
+                            <p>Тем более до зимы лошадки находятся на свободном выгуле. И только когда выпадает первый
+                                снег, их определяют по левадам.</p>
+                        </div>
+                    </div>
+
+                    <div class="photo-slide" data-bg="./assets/img/gallery/farm-4.jpg">
+                        <div class="photo-caption">
+                            <p>– Наверное, если бы в нашей стране так не поддерживали фермеров, у нас бы ничего не
+                                получилось. Наш Президент – большой молодец, мы ему безмерно благодарны за особую
+                                теплоту к сельчанам, за внимание к регионам и людям, что трудятся на земле – подчеркнул
+                                Олег.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="slider-btn prev">‹</button>
+                <button class="slider-btn next">›</button>
+            </section>
+
+
+
+            <section class="text__desc_1 reveal">
+                <div class="text__container">
+                    <hr class="text__divider" />
+                    <p>
+                        Мы не успели отойти от знакомства с грациозными лошадьми, как фермеры подвели нас к следующим
+                        обитателям дома — быку Фердинанду и его спутнице корове Жозефине.
+                        Заглянули мы в гости и к вьетнамской свинке Черничке. Но и это далеко не все спасённые животные
+                        фермы…
+                    </p>
+                    <p>
+                        — Стараемся создать для них условия как дома — максимально приближённые к естественной среде
+                        обитания.
+                        И даём шанс на новую жизнь, — поделились супруги.
+                    </p>
+                </div>
+            </section>
+
+            <section class="photo-mosaic reveal" id="sec-mosaic">
+                <div class="mosaic-grid">
+                    <div class="mosaic-item" data-full="./assets/img/mosaic/horses.jpg">
+                        <img src="./assets/img/mosaic/horses.jpg" alt="Скакуны">
+                        <div class="overlay"><span>Скакуны</span></div>
+                    </div>
+
+                    <div class="mosaic-item" data-full="./assets/img/mosaic/josephine.jpg">
+                        <img src="./assets/img/mosaic/josephine.jpg" alt="Корова Жозефина">
+                        <div class="overlay"><span>Корова «Жозефина»</span></div>
+                    </div>
+
+                    <div class="mosaic-item" data-full="./assets/img/mosaic/stars.jpg">
+                        <img src="./assets/img/mosaic/stars.jpg" alt="Свинка Звездочка">
+                        <div class="overlay"><span>Свинка «Звездочка»</span></div>
+                    </div>
+
+                    <div class="mosaic-item" data-full="./assets/img/mosaic/ducks.jpg">
+                        <img src="./assets/img/mosaic/ducks.jpg" alt="Гуси">
+                        <div class="overlay"><span>Гуси</span></div>
+                    </div>
+
+                    <div class="mosaic-item" data-full="./assets/img/mosaic/paulin.jpg">
+                        <img src="./assets/img/mosaic/paulin.jpg" alt="Необычная птица">
+                        <div class="overlay"><span>Необычная птица</span></div>
+                    </div>
+
+                    <div class="mosaic-item" data-full="./assets/img/mosaic/horse-head.jpg">
+                        <img src="./assets/img/mosaic/horse-head.jpg" alt="Понимание без слов">
+                        <div class="overlay"><span>Понимание без слов</span></div>
+                    </div>
+
+                    <div class="mosaic-item" data-full="./assets/img/mosaic/chicken.jpg">
+                        <img src="./assets/img/mosaic/chicken.jpg" alt="Курочки">
+                        <div class="overlay"><span>Курочки</span></div>
+                    </div>
+
+                    <div class="mosaic-item" data-full="./assets/img/mosaic/drago.jpg">
+                        <img src="./assets/img/mosaic/drago.jpg" alt="Козел «Дракон»">
+                        <div class="overlay"><span>Козел «Дракон»</span></div>
+                    </div>
+
+                    <div class="mosaic-item" data-full="./assets/img/mosaic/house.jpg">
+                        <img src="./assets/img/mosaic/house.jpg" alt="Уютный дом">
+                        <div class="overlay"><span>Уютный дом</span></div>
+                    </div>
+
+                    <div class="mosaic-item" data-full="./assets/img/mosaic/dog.jpg">
+                        <img src="./assets/img/mosaic/dog.jpg" alt="Стороож дома">
+                        <div class="overlay"><span>Стороож двора</span></div>
+                    </div>
+                </div>
+
+                <!-- Модальное окно -->
+                <div class="mosaic-modal" id="mosaicModal">
+                    <div class="mosaic-backdrop"></div>
+                    <span class="mosaic-close">&times;</span>
+                    <img class="mosaic-modal-img" id="mosaicModalImg" alt="">
+                    <div class="mosaic-caption" id="mosaicCaption"></div>
+                </div>
+            </section>
+
+
+            <section class="text__desc_2 reveal" id="text__desc_2">
+                <div class="text__container">
+                    <hr class="text__divider" />
+                    <p>
+                        У Оксаны и Олега четверо замечательных детей, которых они с самого детства приучают к сельскому
+                        труду.
+                        За каждым ребёнком закреплены свои обязанности. Дочка Саша с лошадьми помогает, корову может
+                        покормить и подоить.
+                        Аня за козочками смотрит. Сын Святослав отвечает за собак и котов. Каждый из семейства — на
+                        подхвате!
+                    </p>
+                    <p>
+                        — Часто у нас спрашивают: «Зачем вам столько животных? Ради чего вы всё это делаете?»
+                        А мы по-другому и не можем. Практически все деньги уходят на лечение — благо, многому я
+                        научилась со времён работы в Ратомке.
+                        И если не требуется операция, могу поставить животное на ноги сама, — рассказала героиня.
+                        — Наши соседи часто обращаются с просьбами вылечить их питомцев.
+                        А я никому не отказываю — опять же, по-другому не умею.
+                    </p>
+                </div>
+            </section>
+
+
+            <section class="farm-final reveal" id="sec-finale">
+                <div class="farm-grid">
+                    <div class="farm-text">
+                        <p>
+                            Кстати, все сельскохозяйственные постройки на своём участке фермеры возвели без чужой помощи
+                            —
+                            вдвоём, своими руками, учились по роликам в интернете.
+                        </p>
+                        <p>
+                            — Трудности нас никогда не пугали, только ещё больше сплотили.
+                            И если бы мне 20 лет назад сказали, что я перееду жить в деревню, построю дом, заведу
+                            хозяйство
+                            и буду возить сено в тракторе — ни за что бы не поверил, — смеётся Олег.
+                        </p>
+                        <blockquote>
+                            «А сейчас не представляю жизнь другой. Всё благодаря Оксане — она моя сила.
+                            И мы — одна команда».
+                            <cite>— Олег Макоско</cite>
+                        </blockquote>
+                    </div>
+
+                    <div class="farm-video">
+                        <video class="vertical-video" controls playsinline
+                            poster="./assets/img/hero/couple-hugging.jpg">
+                            <source src="./assets/videos/final.mp4" type="video/mp4">
+                            Ваш браузер не поддерживает видео.
+                        </video>
+                    </div>
+                </div>
+            </section>
+
+
+        </section>
+
+        <section class="projects-section container" id="projects" aria-label="Живой репортаж — материалы">
+            <div class="section-header">
+                <h2 class="section-title text-pr">Живой репортаж — материалы</h2>
+            </div>
+
+            <div class="projects-viewport" data-autoplay="true" data-interval="5000">
+                <div class="projects-stage">
+                    <a href="https://www.sb.by/sp/nikogda-ne-sdavaites/" class="project-card">
+                        <img src="./assets/img/projects/last.jpg" loading="lazy" alt="Белорусы+" />
+                        <div class="project-info">
+                            <h3>Никогда не сдавайтесь!</h3>
+                        </div>
+                    </a>
+
+                    <a href="https://www.sb.by/sp/poydem-sobirat-klyukvu/" class="project-card is-active">
+                        <img src="./assets/img/projects/rluk.jpg" loading="lazy" alt="Адаптация" />
+                        <div class="project-info">
+                            <h3>Пойдем собирать клюкву?</h3>
+                        </div>
+                    </a>
+
+                    <a href="https://www.sb.by/sp/spotting/" class="project-card">
+                        <img src="./assets/img/projects/hero.jpg" loading="lazy" alt="Кто такие споттеры?" />
+                        <div class="project-info">
+                            <h3>Кто такие споттеры?</h3>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="projects-controls">
+                    <button class="pr-btn prev" aria-label="Назад">◀</button>
+                    <div class="pr-dots" aria-hidden="true"></div>
+                    <button class="pr-btn next" aria-label="Вперед">▶</button>
+                </div>
+            </div>
+
+            <div class="projects-footer">
+                <a href="https://www.sb.by/articles/themes/spetsproekt-sb-nash-zhivoy-reportazh/"
+                    class="btn-all-projects">Смотреть все материалы</a>
+            </div>
+        </section>
+    </main>
+
+
+    <footer class="site-footer">
+        <div class="footer-credits">
+            <p>Автор: <strong>Екатерина КВАЧЁНОК</strong></p>
+            <p>Фото: <strong>Кристина ФАНЧЕНКО</strong></p>
+        </div>
+
+        <hr class="footer-divider" />
+
+        <div class="footer-copy">© Издательский дом «Беларусь сегодня»</div>
+    </footer>
+
+    <div id="horseUp" class="horse-up" role="button" tabindex="0" aria-label="Наверх">
+        <div class="horse-container">
+            <img class="losh" src="./assets/img/silhouettes/horse_head_right.png" alt="Наверх">
+            <span class="horse-label">НАВЕРХ?</span>
+        </div>
+    </div>
+    <script src="./assets/js/script.js"></script>
+    <script>
+        function loadYandexMetrika() {
+            (function (m, e, t, r, i, k, a) {
+                m[i] =
+                    m[i] ||
+                    function () {
+                        (m[i].a = m[i].a || []).push(arguments);
+                    };
+                m[i].l = 1 * new Date();
+                for (var j = 0; j < document.scripts.length; j++) {
+                    if (document.scripts[j].src === r) return;
+                }
+                (k = e.createElement(t)),
+                    (a = e.getElementsByTagName(t)[0]),
+                    (k.async = 1),
+                    (k.src = r),
+                    a.parentNode.insertBefore(k, a);
+            })(
+                window,
+                document,
+                "script",
+                "https://mc.yandex.ru/metrika/tag.js",
+                "ym"
+            );
+            ym(16707172, "init", {
+                webvisor: true,
+                clickmap: true,
+                accurateTrackBounce: true,
+                trackLinks: true,
+            });
+        }
+
+        function loadGTM() {
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != "dataLayer" ? "&l=" + l : "";
+                j.async = true;
+                j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, "script", "dataLayer", "GTM-KRVNNK");
+        }
+
+        window.addEventListener("load", () => {
+            setTimeout(loadYandexMetrika, 3000);
+            setTimeout(loadGTM, 4000);
+        });
+    </script>
+</body>
+
+</html>

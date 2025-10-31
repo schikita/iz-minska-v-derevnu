@@ -1312,12 +1312,13 @@ footer p {
   font-weight: 400;
   line-height: 1.75;
   color: #1a1a1a;
-  font-size: 1.1rem;
+  
 }
 
 .farm-text p {
   margin-bottom: 1.4rem;
   text-indent: 1.4em;
+  font-size: 1.4rem;
 }
 
 .farm-text blockquote {

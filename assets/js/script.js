@@ -10,14 +10,9 @@
         // === THREE.js background + fireflies ===
         const ENABLE_HERO_PARTICLES = false;
         const canvas = document.querySelector('#hero-canvas');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setClearColor(0x000000, 0.1);
-        camera.position.setZ(50);
-
+       
+      
+   
         // Создаём градиент фон
         const canvas2d = document.createElement('canvas');
         canvas2d.width = 512;
@@ -39,11 +34,11 @@
             //ctx.fillRect(Math.random() * 512, Math.random() * 512, Math.random() * 2, Math.random() * 2);
        // }
 
-        const bgTexture = new THREE.CanvasTexture(canvas2d);
+   
         // scene.background = bgTexture;
 
         // Частицы (светлячки)
-        const particlesGeometry = new THREE.BufferGeometry();
+     
         const particlesCnt = 800;
         const posArray = new Float32Array(particlesCnt * 3);
         const velocities = new Float32Array(particlesCnt * 3);
@@ -61,57 +56,17 @@
             sizes[i] = Math.random() * 0.5 + 0.1;
         }
 
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-        particlesGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+       
+     
         
-        const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.3,
-            color: 0xffd700,
-            blending: THREE.AdditiveBlending,
-            transparent: true,
-            opacity: 0.8,
-            sizeAttenuation: true
-        });
 
-        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particlesMesh);
 
-        let mouseX = 0, mouseY = 0;
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
+       
 
-        const clock = new THREE.Clock();
+       
 
-        function animate() {
-            requestAnimationFrame(animate);
-            const t = clock.getElapsedTime();
-            const positions = particlesMesh.geometry.attributes.position.array;
-
-            for (let i = 0; i < particlesCnt; i++) {
-                positions[i * 3] += velocities[i * 3] * Math.sin(t + i * 0.1);
-                positions[i * 3 + 1] += velocities[i * 3 + 1] * Math.cos(t + i * 0.1);
-                positions[i * 3 + 2] += velocities[i * 3 + 2] * Math.sin(t + i * 0.05);
-                
-                // Wrap around
-                if (positions[i * 3 + 1] < -100) positions[i * 3 + 1] = 100;
-                if (positions[i * 3 + 1] > 100) positions[i * 3 + 1] = -100;
-                if (positions[i * 3] > 100) positions[i * 3] = -100;
-                if (positions[i * 3] < -100) positions[i * 3] = 100;
-            }
-
-            particlesMesh.geometry.attributes.position.needsUpdate = true;
-            
-            // Плавное движение камеры с мышкой
-            camera.position.x += (mouseX / window.innerWidth * 8 - camera.position.x - 4) * .015;
-            camera.position.y += (-mouseY / window.innerHeight * 8 - camera.position.y + 4) * .015;
-            
-            renderer.render(scene, camera);
-        }
-
-        animate();
-
+      
+    
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
